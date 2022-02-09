@@ -17,15 +17,18 @@ public:
 	void push(T v) { cout << "T" << endl; }
 };
 
-// partial specialization( �κ� Ư��ȭ, �κ� ����ȭ)
-template<typename T> class Stack<T*>
+// partial specialization( 부분 특수화 )
+template<typename T>
+class Stack<T*> // 위의 <typename ...> 보다 여기가 더 중요하다. 이 곳을 먼저 보고 그 뒤에, 필요한 타입 네임에 대해서만 적을 것.
+	        // 포인터인 경우에 대해 specialization하고, 그래도 T는 정해지지 않았으므로 위에 적는다.
 {
 public:
 	void push(T* v) { cout << "T*" << endl; }
 };
 
 // specialization
-template<> class Stack<char*>
+template<>
+class Stack<char*>   // T가 char*로 안전히 정해졌다.즉, 더이상 T와는 관계없어졌으므로 typename T를 지운다.
 {
 public:
 	void push(char* v) { cout << "char*" << endl; }
